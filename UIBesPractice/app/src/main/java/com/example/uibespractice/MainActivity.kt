@@ -8,12 +8,16 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private val msgList = ArrayList<Msg>()
-    private var adapter: MsgAdapter? = null
+    private lateinit var adapter: MsgAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //没有被初始化
+        if (!::adapter.isInitialized) {
+
+        }
         initMsg()
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
