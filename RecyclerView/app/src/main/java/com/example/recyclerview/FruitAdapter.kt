@@ -21,18 +21,7 @@ class FruitAdapter(private val fruitList: List<Fruit>): RecyclerView.Adapter<Fru
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fruit_item,parent,false)
-        //设置点击事件
-        val viewHolder = ViewHolder(view)
-        viewHolder.itemView.setOnClickListener {
-            val position = viewHolder.adapterPosition
-            val fruit = fruitList[position]
-            Toast.makeText(parent.context,"you clicked view ${fruit.name}",Toast.LENGTH_SHORT).show()
-        }
-        viewHolder.fruitImage.setOnClickListener {
-            val position = viewHolder.adapterPosition
-            val fruit = fruitList[position]
-            Toast.makeText(parent.context,"you clicked image ${fruit.name}",Toast.LENGTH_SHORT).show()
-        }
+
         return ViewHolder(view)
     }
 
@@ -41,6 +30,13 @@ class FruitAdapter(private val fruitList: List<Fruit>): RecyclerView.Adapter<Fru
         val fruit = fruitList[position]
         holder.fruitImage.setImageResource(fruit.imageId)
         holder.fruitName.text = fruit.name
+        //设置点击事件
+        holder.itemView.setOnClickListener {
+            Toast.makeText(holder.itemView.context,"you clicked view ${fruit.name}",Toast.LENGTH_SHORT).show()
+        }
+        holder.fruitImage.setOnClickListener {
+            Toast.makeText(holder.itemView.context,"you clicked image ${fruit.name}",Toast.LENGTH_SHORT).show()
+        }
     }
 
     //告诉数据源的长度
