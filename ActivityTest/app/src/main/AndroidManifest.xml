@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.activitytest">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ActivityTest">
+        <activity android:name=".ThirdActivity">
+            <intent-filter tools:ignore="AppLinkUrlError">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+<!--                <data android:scheme="https" />-->
+                <data android:scheme="tel" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SecondActivity">
+            <intent-filter tools:ignore="ExtraText">
+                /*
+                只有action和category同时匹配Intent中指定的action
+                和category时 这个activity才能响应该Intent
+                */
+                <action android:name="com.example.activitytest.ACTION_START" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.example.activitytest.MY_CATEGORY" />
+                /*
+                可以配置一个data标签 用于更精确地指定当前Activity能够响应的数据
+                android:scheme 用于指定数据的协议部分
+                android:host 用于指定数据的主机名部分
+                android:post 用于指定数据的端口部分
+                android:path 用于指定主机名和端口之后的部分
+                android:mineType 用于指定可以处理的数据类型 允许使用通配符的方式进行指定
+
+                只有当data标签中指定的内容和Intent携带的data一致时才会响应Activity
+                */
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FirstActivity"
+            android:label="This is FirstActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

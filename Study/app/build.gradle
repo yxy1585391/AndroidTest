@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+/*
+com.android.application 应用程序模块
+com.android.library 库模块
+应用程序模块是可以直接运行的  库模块只能作为代码库依赖于别的应用程序模块来运行
+*/
+
+/*
+kotlin-android
+kotlin-android-extensions
+如果想要使用kotlin来开发 必须引入第一个插件
+第二个插件为我们提供了非常好的kotlin扩展功能
+* */
+
+android {
+    compileSdkVersion 29//指定项目的编译版本
+    buildToolsVersion "29.0.3"//指定项目构建工具的版本
+
+    defaultConfig {
+        applicationId "com.example.study" //每个应用的唯一标识符
+        minSdkVersion 16//最低兼容的版本
+        targetSdkVersion 29 //在目标版本上进行了充分的测试(最高在哪个版本进行了测试 会引入一些新特性)
+        versionCode 1 //项目版本号
+        versionName "1.0" //项目的版本名
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"//用于在当前项目启用单元测试JUint
+    }
+
+    buildTypes {//用于指定生成安装文件的相关配置
+        release {//release闭包用于指定生成正式版安装文件的配置
+            minifyEnabled false  //用于指定是否对项目的代码进行混淆
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //用于指定混淆时使用的规则文件
+            //proguard-android-optimize.txt是所有项目通用的混淆规则
+            //proguard-rules.pro 填写当前项目特有的混淆规则
+        }
+
+        //debug闭包用于指定生成测试版安装文件的配置 可以忽略不写
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+/*三种依赖关系
+1.本地依赖    可以对本地的jar包或者目录添加依赖关系
+2.库依赖      可以对项目中的库模块添加依赖关系
+3.远程依赖    可以对jcenter仓库上的开源项目添加依赖关系
+* */
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
