@@ -15,7 +15,7 @@ import java.lang.StringBuilder
 class NewsTitleFragment: Fragment() {
     private var isTwoPane = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.news_content_frag,container,false)
+        return inflater.inflate(R.layout.news_title_frag,container,false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -38,14 +38,16 @@ class NewsTitleFragment: Fragment() {
         return newsList
     }
 
-    private fun getRandomLengthString(str: String): String {
-        val n = (1..20).random()
-        val builder = StringBuilder()
-        repeat(n) {
-            builder.append(str)
-        }
-        return builder.toString()
-    }
+//    private fun getRandomLengthString(str: String): String {
+//        val n = (1..20).random()
+//        val builder = StringBuilder()
+//        repeat(n) {
+//            builder.append(str)
+//        }
+//        return builder.toString()
+//    }
+
+    private fun getRandomLengthString(str: String): String = str * (1..20).random()
 
     inner class NewsAdapter(private val newsList: List<News>): RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
