@@ -14,10 +14,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //没有被初始化
-        if (!::adapter.isInitialized) {
-
-        }
+//        //没有被初始化
+//        if (!::adapter.isInitialized) {
+//
+//        }
         initMsg()
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
