@@ -46,7 +46,7 @@ open class BaseActivity : AppCompatActivity() {
                     setPositiveButton("OK") { _,_ ->
                         ActivityCollector.finishAll()
                         val i = Intent(this@BaseActivity,LoginActivity::class.java)
-                        context.startActivity(intent)
+                        context.startActivity(i)
                     }
                     show()
                 }
