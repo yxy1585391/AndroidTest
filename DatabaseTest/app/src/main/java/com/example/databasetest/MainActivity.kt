@@ -1,6 +1,7 @@
 package com.example.databasetest
 
 import android.content.ContentValues
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        getSharedPreferences("data",Context.MODE_PRIVATE).open {
+            putString("name","Tom")
+            putInt("age",20)
+            putBoolean("married",false)
+        }
 
         val dbHelper = MyDatabaseHelper(this,"BookStore.db",1)
 //        val dbHelper = MyDatabaseHelper(this,"BookStore.db",2) //只要version比原先的大 就可以升级
