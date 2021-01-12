@@ -25,13 +25,7 @@ class MyProvider: ContentProvider() {
         TODO("Not yet implemented")
     }
 
-    override fun query(
-        uri: Uri,
-        projection: Array<out String>?,
-        selection: String?,
-        selectionArgs: Array<out String>?,
-        sortOrder: String?
-    ): Cursor? {
+    override fun query(uri: Uri, projection: Array<out String>?, selection: String?, selectionArgs: Array<out String>?, sortOrder: String?): Cursor? {
         when(uriMatcher.match(uri)) {
             table1Dir ->  {
                 //查询table1表中所有数据
@@ -45,6 +39,7 @@ class MyProvider: ContentProvider() {
             table2Item -> {
                 //查询table2表中的单条数据
             }
+            else -> null
         }
     }
 
