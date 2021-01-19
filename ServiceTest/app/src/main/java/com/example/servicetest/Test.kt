@@ -14,19 +14,36 @@ class SimpleData<out T>(private val data: T?) {
     }
 }
 
+interface Transformer<in T> {
+    fun transform(t: T): String
+}
+
 
 fun main() {
+
+    val trans = object : Transformer<Person> {
+        override fun transform(t: Person): String {
+            return "${t.name} ${t.age}"
+        }
+    }
+    handleTransformer(trans)
+
 //    val result1 = getGenericType<String>()
 //    val result2 = getGenericType<Int>()
 //    println("result1 is $result1")
 //    println("result2 is $result2")
 
-    val student = Student("Tom",19)
-    val data = SimpleData<Student>(student)
-    handleMyData(data)
-    val studentData = data.get()
+//    val student = Student("Tom",19)
+//    val data = SimpleData<Student>(student)
+//    handleMyData(data)
+//    val studentData = data.get()
 }
 
 fun handleMyData(data: SimpleData<Person>) {
     val peronData = data.get()
+}
+
+fun handleTransformer(trans: Transformer<Student>) {
+    val student = Student("Tom",19)
+    val result = trans.transform(student)
 }
