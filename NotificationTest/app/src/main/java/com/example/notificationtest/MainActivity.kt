@@ -27,11 +27,14 @@ class MainActivity : AppCompatActivity() {
 
             val channel2 = NotificationChannel("important","Important",NotificationManager.IMPORTANCE_HIGH)
             manager.createNotificationChannel(channel2)
+
+            val channel3 = NotificationChannel("im","Important",NotificationManager.IMPORTANCE_HIGH)
+            manager.createNotificationChannel(channel3)
         }
         sendNotice.setOnClickListener {
             val intent = Intent(this,NotificationActivity::class.java)
             val pi = PendingIntent.getActivity(this,0,intent,0)
-            val notification = NotificationCompat.Builder(this,"important")
+            val notification = NotificationCompat.Builder(this,"im")
                     .setContentTitle("This is content title")
 //                    .setContentText("This is content text")
                     .setSmallIcon(R.drawable.ic_launcher_background)
@@ -42,6 +45,7 @@ class MainActivity : AppCompatActivity() {
                     .setStyle(NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(resources,
                     R.drawable.ic_launcher_background)))
 //                    .setAutoCancel(true) //取消通知
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .build()
             manager.notify(1,notification)
         }
@@ -54,3 +58,8 @@ class MainActivity : AppCompatActivity() {
                             "This is content text,This is content text,This is content text"))
   还可以使用setStyle显示大图
 * */
+//
+//return new NotificationCompat.Builder(context, XXX_ID).setLargeIcon(BitmapFactory.decodeResource(context.getResources
+//(), R.mipmap.ic_launcher)).setSmallIcon(R.mipmap.icon_notification_small).setContentIntent(intent).setContentTitle(subject).setContentText(message)
+//.setAutoCancel(true).setShowWhen(true).setVisibility(Notification.VISIBILITY_PUBLIC).setPriority(NotificationCompat.PRIORITY_HIGH);
+//}
