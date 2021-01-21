@@ -3,6 +3,8 @@ package com.example.networktest
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
@@ -173,6 +175,17 @@ class MainActivity : AppCompatActivity() {
             }
         }catch (e: IOException) {
             e.printStackTrace()
+        }
+    }
+
+    private fun parseJSONWithGSON(jsonData: String) {
+        val gson = Gson()
+        val typeOf = object : TypeToken<List<App>>() {}.type
+        val appList = gson.fromJson<List<App>>(jsonData,typeOf)
+        for (app in appList) {
+            Log.d("MainActivity","id is ${app.id}")
+            Log.d("MainActivity","name is ${app.name}")
+            Log.d("MainActivity","version is ${app.version}")
         }
     }
 }
