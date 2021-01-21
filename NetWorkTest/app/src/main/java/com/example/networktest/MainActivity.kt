@@ -8,6 +8,7 @@ import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
+import org.xml.sax.InputSource
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.BufferedReader
@@ -17,6 +18,7 @@ import java.io.StringReader
 import java.lang.StringBuilder
 import java.net.HttpURLConnection
 import java.net.URL
+import javax.xml.parsers.SAXParserFactory
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
@@ -97,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 val response = client.newCall(request).execute()
                 val responseData = response.body?.string()
                 if (responseData != null) {
-                    parseXMLWithPull(responseData)
+                    parseXMLWithSAX(responseData)
                 }
             }catch (e: IOException) {
                 e.printStackTrace()
@@ -140,5 +142,21 @@ class MainActivity : AppCompatActivity() {
             e.printStackTrace()
         }
     }
+
+    private fun parseXMLWithSAX(xmlData: String) {
+        try {
+            val factory = SAXParserFactory.newInstance()
+            val xmlReader = factory.newSAXParser().xmlReader
+            val handler = ContentHandler()
+            //将ContentHandler的实例设置到XMLReader
+            xmlReader.contentHandler = handler
+            //开始执行解析
+            xmlReader.parse(InputSource(StringReader(xmlData)))
+        }catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    
 
 }
