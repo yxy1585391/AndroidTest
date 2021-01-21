@@ -8,6 +8,7 @@ import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
+import org.json.JSONArray
 import org.xml.sax.InputSource
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserFactory
@@ -94,12 +95,13 @@ class MainActivity : AppCompatActivity() {
                 val client = OkHttpClient()
                 val request = Request.Builder()
 //                http://10.0.2.2/get_data.xml
-                        .url("http://10.0.2.2/get_data.xml")
+                        .url("http://10.0.2.2/get_data.json")
                         .build()
                 val response = client.newCall(request).execute()
                 val responseData = response.body?.string()
                 if (responseData != null) {
-                    parseXMLWithSAX(responseData)
+//                    parseXMLWithSAX(responseData)
+                    parseJSONWithJSONObject(responseData)
                 }
             }catch (e: IOException) {
                 e.printStackTrace()
@@ -157,6 +159,20 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    
-
+    private fun parseJSONWithJSONObject(jsonData: String) {
+        try {
+            val jsonArray = JSONArray(jsonData)
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                val id = jsonObject.getString("id")
+                val name = jsonObject.getString("name")
+                val version = jsonObject.getString("version")
+                Log.d("MainActivity","id is $id")
+                Log.d("MainActivity","name is $name")
+                Log.d("MainActivity","version is $version")
+            }
+        }catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
 }
