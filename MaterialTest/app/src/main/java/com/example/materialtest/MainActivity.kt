@@ -13,7 +13,7 @@ import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
-    val fruits = mutableListOf(Fruit("Apple", R.drawable.apple),
+    private val fruits = mutableListOf(Fruit("Apple", R.drawable.apple),
         Fruit("Banana", R.drawable.banana),
         Fruit("Orange", R.drawable.orange),
         Fruit("Watermelon", R.drawable.watermelon),
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         Fruit("Cherry", R.drawable.cherry),
         Fruit("Mango", R.drawable.mango))
 
-    val fruitList = ArrayList<Fruit>()
+    private val fruitList = ArrayList<Fruit>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
