@@ -18,6 +18,12 @@ class MainActivity : AppCompatActivity() {
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeAsUpIndicator(R.drawable.ic_menu)
         }
+
+        navView.setCheckedItem(R.id.nvaCall)//设置为默认选中
+        navView.setNavigationItemSelectedListener {
+            drawerLayout.closeDrawers()
+            true
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
