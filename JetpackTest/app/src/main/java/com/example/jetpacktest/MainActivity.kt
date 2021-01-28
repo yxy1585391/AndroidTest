@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.edit
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -21,14 +22,17 @@ class MainActivity : AppCompatActivity() {
         val countReserved = sp.getInt("count_reserved",0)
         viewModel = ViewModelProvider(this,MainViewModelFactory(countReserved)).get(MainViewModel::class.java)
         plusOneButton.setOnClickListener {
-            viewModel.counter += 1
-            refreshCounter()
+            viewModel.plusOne()
         }
         clearButton.setOnClickListener {
-            viewModel.counter = 0
-            refreshCounter()
+            viewModel.clear()
         }
         refreshCounter()
+
+        viewModel.counter.observe(this, Observer { count ->
+            infoText.text = count.toString()
+        })
+//        lifecycle.addObserver(MyObserver())
     }
 
     private fun refreshCounter() {
@@ -38,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         sp.edit {
-            putInt("count_reserved",viewModel.counter)
+            putInt("count_reserved",viewModel.counter.value ?: 0)
         }
     }
 }
