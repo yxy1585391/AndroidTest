@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.edit
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_main.*
@@ -33,6 +34,14 @@ class MainActivity : AppCompatActivity() {
             infoText.text = count.toString()
         })
 //        lifecycle.addObserver(MyObserver())
+
+        getUserBtn.setOnClickListener {
+            val userId = (0..10000).random().toString()
+            viewModel.getUser(userId)
+        }
+        viewModel.user.observe(this, Observer { user ->
+            infoText.text = user.firstName
+        })
     }
 
     private fun refreshCounter() {
@@ -44,5 +53,9 @@ class MainActivity : AppCompatActivity() {
         sp.edit {
             putInt("count_reserved",viewModel.counter.value ?: 0)
         }
+    }
+
+    fun getUser(userId: String): LiveData<User>{
+        return Repository.getUser(userId)
     }
 }
