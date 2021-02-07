@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp">
+
+    <TextView
+        android:id="@+id/dateInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="4" />
+
+    <ImageView
+        android:id="@+id/skyIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp" />
+
+    <TextView
+        android:id="@+id/skyInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="3"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/temperatureInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="3"
+        android:gravity="end" />
+
+
+</LinearLayout>
+
+
+<!--
+   layout_gravity是“子控件想在父控件中的位置”
+   gravity是“父控件想要子控件在里面的位置”
+
+   frameLayout 不对子控件的位置做限制，放在哪里都可以。
+   但是LinearLayout 可以理解为
+   如果LinearLayout不设置子控件的位置的话，那么必须从一端到另一端进行堆叠
+
+   LinearLayout是按照从左到右或者从上到下的位置去堆叠
+   FrameLayout相当于一块画布，里面元素的位置是可以随意跑的
+-->
