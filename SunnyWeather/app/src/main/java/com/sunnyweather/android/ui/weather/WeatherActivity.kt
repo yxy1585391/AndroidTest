@@ -105,7 +105,7 @@ class WeatherActivity : AppCompatActivity() {
         currentTemp.text = currentTempText
         currentSky.text = getSky(realtime.skycon).info
         val currentPM25Text = "空气指数 ${realtime.airQuality.aqi.chn.toInt()}"
-        currentAOI.text = currentPM25Text
+        currentAQI.text = currentPM25Text
         nowLayout.setBackgroundResource(getSky(realtime.skycon).bg)
         //填充forecast数据
         val days = daily.skycon.size

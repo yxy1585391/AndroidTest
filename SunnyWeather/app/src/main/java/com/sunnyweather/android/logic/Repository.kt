@@ -1,21 +1,16 @@
 package com.sunnyweather.android.logic
 
-import android.content.Context
-import android.view.KeyEvent
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.sunnyweather.android.logic.dao.PlaceDao
 import com.sunnyweather.android.logic.model.Place
 import com.sunnyweather.android.logic.model.Weather
 import com.sunnyweather.android.logic.network.SunnyWeatherNetwork
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import java.io.IOException
 import java.lang.RuntimeException
 import kotlin.coroutines.CoroutineContext
-import kotlin.math.ln
 
 object Repository {
     fun searchPlaces(query: String) = fire(Dispatchers.IO) {
